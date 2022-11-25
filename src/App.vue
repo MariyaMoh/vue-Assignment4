@@ -1,16 +1,29 @@
 <script setup>
-import YesNo from './components/User.vue'
+
 </script>
 <template>
-  <Suspense>
-    <YesNo/>
-    <template #fallback>
-      <img src="https://media.tenor.com/o8m3bKTsifUAAAAC/hold-on.gif" />
-    </template>
-  </Suspense>
+<header >
+ <p class="logo"><router-link class="nav-link" to="/">VAZA</router-link></p>
+
+ 
+  <nav class="nav">
+ 
+     <!-- <router-link class="nav-link" to="/">Home</router-link> -->
+    <router-link class="nav-link" to="/about">About</router-link> 
+    <!-- <router-link class="nav-link" to="/contact">Conract us</router-link>  -->
+     <!-- <router-link class="nav-link" to="/order">Order</router-link>  -->
+     <router-link class="nav-link" to="/user">API</router-link> 
+     
+   
+  </nav>
+    
+  </header>
   
+
+  <main>
+    <router-view />
+  </main>
+<footer>
+  <p> Twitter&nbsp;&nbsp;Instagram&nbsp;&nbsp;YouTube&nbsp;&nbsp;VAZA 2022</p> </footer>
 </template>
 
-<style scoped>
-
-</style>

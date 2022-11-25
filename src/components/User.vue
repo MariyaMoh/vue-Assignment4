@@ -1,5 +1,6 @@
 <script setup>
 	import { ref } from 'vue'
+  import { useRouter } from 'vue-router';
 	const response = ref({})
 
   // adding delay
@@ -16,52 +17,35 @@
   } catch (error) {
     response.value = { answer: 'Error! Could not reach the API. ' + error, avatar: [''] }
   }
+console.log(response.value);
+
+const user = ref({});
+const router = useRouter();
+function userSelected(userObj) {
+  user.value = userObj;
+  router.push({
+    name: "UserDetails",
+    params: { user: userObj.name },
+  });
+
+}
+
 
 </script>
 
-<template id="ts">
- <h1>Users</h1> <br/>
-<table id="customers">
+<template>
+
+<table class="customers">
+  <h1>Our Customers</h1> <br/>
     <tr>
     <th>Name</th>
     <th>Avatar</th>
   </tr>
-  <tr v-for="item in response" v-bind:key="item.id" >
+  <tr v-for="(item,index) in response" :key="index" >
     <td>{{item.name}}</td>
-    <td> <img :src="item.avatar" /></td>
+    <td> <img :src="item.avatar" @click="userSelected(item)"/></td>
   </tr>
 </table>
+<router-view :user="user"></router-view>
 </template>
-<style>
 
-h1{
-  font-size: 2rem;
-  text-align: center;
-}
-#customers {
-  
-
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  
-}
-
-#customers td, #customers th {
-
-  border: 1px solid #ddd;
-  padding: 5rem;
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-
- padding: 2rem;
-  text-align: left;
-  background-color: #171b9f;
-  color: white;
-}
-</style>
